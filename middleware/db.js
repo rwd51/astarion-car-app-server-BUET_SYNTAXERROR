@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
-
+const password = 'ubnaNwoVe0WCNeeR';
 const mongoURI = 'mongodb+srv://ruwad45678:<password>@cluster0.9ts500q.mongodb.net/';
 
 // Replace `<password>` with your actual password
-const password = 'ubnaNwoVe0WCNeeR';
+
 const connectionString = mongoURI.replace('<password>', password);
 
 const connectDB = async () => {
     try {
-        const connection = await mongoose.connect(connectionString, {
+        const connection = await mongoose.connect(process.env._MONGO_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
