@@ -1,0 +1,34 @@
+name: Test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "18"
+
+      - name: Install server dependencies
+        run: npm install
+
+      - name: Set up environment variables
+        run: echo "_MONGO_URI=${{ secrets._MONGO_URI }}" >> $GITHUB_ENV
+
+      - name: Set up secret variables
+        run: echo "_JWT_SECRET=${{ secrets._JWT_SECRET }}" >> $GITHUB_ENV
+
+      - name: Run server tests
+        run: npm run test
+      

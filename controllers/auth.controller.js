@@ -92,6 +92,7 @@ const is_verify = async (req, res) => {
   const register = async (req, res) => {
     try {
       const { name, email, password, role } = req.body;
+      console.log(name, email, password, role);
   
       // Validate request body
       if (!name || !email || !password || !role) {
