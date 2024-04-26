@@ -11,6 +11,8 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/auth", require("./routes/auth.route"));
+app.use("/api/buyer", require("./routes/buyer.route"));
+app.use("/api/seller", require("./routes/seller.route"));
 /*
 // MongoDB connection URI
 const mongoURI = 'mongodb+srv://ruwad45678:<password>@cluster0.9ts500q.mongodb.net/';
