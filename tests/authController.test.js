@@ -6,10 +6,10 @@ const request = supertest(app);
 // New Registration Test
 test('New Registration Test', async () => {
     const registrationData = {
-        userId: '123456',
-        name: 'John Doe',
-        address: '123 Main St',
-        password: 'password123'
+        name: 'testUser',
+        email: 'tu@gmail.com',
+        password : '123456',
+        role: 'buyer'
     };
 
     const response = await request.post('/api/auth/register').send(registrationData);
@@ -21,8 +21,8 @@ test('New Registration Test', async () => {
 // Login Test
 test('Login Test', async () => {
     const loginCredentials = {
-        userId: '123456',
-        password: 'password123'
+        name: 'testUser',
+        password: '123456'
     };
 
     const response = await request.post('/api/auth/login').send(loginCredentials);
@@ -34,10 +34,10 @@ test('Login Test', async () => {
 // Duplicate Registration Test
 test('Duplicate Registration Test', async () => {
     const registrationData = {
-        userId: '123456',
-        name: 'John Doe',
-        address: '123 Main St',
-        password: 'password123'
+        name: 'testUser',
+        email: 'tu@gmail.com',
+        password : '123456',
+        role: 'buyer'
     };
 
     const response = await request.post('/api/auth/register').send(registrationData);
@@ -45,3 +45,4 @@ test('Duplicate Registration Test', async () => {
     expect(response.status).toBe(400);
     expect(response.body.message).toBe('User already exists');
 });
+
