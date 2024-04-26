@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const connectDB = require("./middleware/db.js");
 
 const app = express();
-const PORT = process.env.PORT || 5000; // Set your desired port
+const PORT = process.env.PORT || 5008; // Set your desired port
 
 // Middleware
 app.use(cors());
