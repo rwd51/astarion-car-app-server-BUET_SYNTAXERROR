@@ -1,6 +1,20 @@
 const Car = require('../models/car.model');
 const User = require('../models/user.model');
 
+const getCarInfo = async (req, res) => {
+    const { carId } = req.params;
+    try {
+        const car = await Car.findById(carId).populate('seller_id', 'name email');
+        if (!car) {
+            return res.status(404).json({ error: 'Car not found' });
+        }
+        res.status(200).json(car);
+    } catch (error) {
+        res.status(500).json({ error: `Failed to fetch car information: ${error.message}` });
+    }
+};
+
+
 // 1. Shows the list of cars the seller has
 const getCarsBySeller = async (req, res) => {
   try {
@@ -123,23 +137,27 @@ const acceptRequest = async (req, res) => {
       res.status(500).json({ error: 'Failed to deliver request' });
     }
   };
+
   const viewRequestedCars = async (req, res) => {
     try {
-      // Extract the seller ID from the request
-      const sellerId = req.user.id;
+        // Extract the seller ID from the request
+        const sellerId = req.user.id;
+        console.log(sellerId);
   
-      // Find cars posted by the seller where there are pending requests
-      const carsWithRequests = await Car.find({ 'requests.status': 'pending', seller_id: sellerId })
-                                        .populate('seller_id', 'name email');
+        // Find cars posted by the seller where there are pending requests
+        const carsWithRequests = await Car.find({ 'requests.status': 'pending', seller_id: sellerId })
+                                          .populate('seller_id', 'name email');
   
-      // Return the cars with pending requests for the specific seller
-      res.status(200).json(carsWithRequests);
+        // Return the cars with pending requests for the specific seller
+        res.status(200).json(carsWithRequests);
     } catch (error) {
-      // Handle errors
-      console.error(error);
-      res.status(500).json({ error: 'Failed to fetch requested cars' });
+        // Handle errors
+        console.error('Error fetching requested cars:', error);
+        res.status(500).json({ error: 'Failed to fetch requested cars' });
     }
-  };
+};
+
+
   const viewDeliveredCars = async (req, res) => {
     try {
       // Extract the seller ID from the request
@@ -168,5 +186,6 @@ module.exports = {
   deleteCar,
   acceptRequest,
   viewRequestedCars,
-  viewDeliveredCars
+  viewDeliveredCars,
+    getCarInfo
 };

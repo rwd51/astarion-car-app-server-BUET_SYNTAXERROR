@@ -8,7 +8,9 @@ const {
   deleteCar,
   acceptRequest,
   viewRequestedCars,
-  viewDeliveredCars
+  viewDeliveredCars,
+    getCarInfo
+
 } = require('../controllers/seller.controller');
 
 // Route to get cars by seller
@@ -31,5 +33,7 @@ router.get('/cars/requested',authorize, viewRequestedCars);
 
 // Route to view cars with delivered requests for the seller
 router.get('/cars/delivered',authorize, viewDeliveredCars);
+
+router.get('/cars/info/:carId', getCarInfo);
 
 module.exports = router;
