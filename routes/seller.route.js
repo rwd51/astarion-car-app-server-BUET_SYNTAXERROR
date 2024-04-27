@@ -27,9 +27,9 @@ router.delete('/cars/:carId', deleteCar);
 router.put('/cars/request/accept', acceptRequest);
 
 // Route to view cars with pending requests for the seller
-router.get('/cars/requested', viewRequestedCars);
+router.get('/cars/requested',authorize, viewRequestedCars);
 
 // Route to view cars with delivered requests for the seller
-router.get('/cars/delivered', viewDeliveredCars);
+router.get('/cars/delivered',authorize, viewDeliveredCars);
 
 module.exports = router;
