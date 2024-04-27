@@ -6,9 +6,9 @@ const mongoURI = 'mongodb+srv://ruwad45678:<password>@cluster0.9ts500q.mongodb.n
 
 const connectionString = mongoURI.replace('<password>', password);
 
-const connectDB = async () => {
+const connectDB =  () => {
     try {
-        const connection = await mongoose.connect(process.env._MONGO_URI, {
+        const connection =  mongoose.connect(process.env._MONGO_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
@@ -16,8 +16,9 @@ const connectDB = async () => {
         return connection;
     } catch (error) {
         console.error('Failed to connect to MongoDB:', error.message);
-        // Throw an error to handle in the index.js file
-        throw error;
+        // // Throw an error to handle in the index.js file
+        // throw error;
+        process.exit(1);
     }
 }
 

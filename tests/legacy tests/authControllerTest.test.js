@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { server, app } = require("../index");
+const { app, server } = require('../../index');
 const request = require("supertest");
 const { MongoClient } = require("mongodb");
 
@@ -27,7 +27,7 @@ describe("Auth controller test", () => {
     const email = "jamal@gmail.com";
     const password = "12312";
     const role = "buyer";
-    jest.setTimeout(10000);
+    jest.setTimeout(6000);
     const response = await request(app)
       .post("/api/auth/register")
       .send({name, email, password , role});

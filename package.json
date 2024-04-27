@@ -4,7 +4,7 @@
   "description": "This is my backend side.",
   "main": "index.js",
   "scripts": {
-    "test": "npx jest --detectOpenHandles --forceExit",
+    "test": "npx jest --detectOpenHandles --watchAll --no-cache --forceExit",
     "test1": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
